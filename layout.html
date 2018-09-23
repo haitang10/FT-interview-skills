@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Layout</title>
+    <style media="screen">
+      html *{
+        padding: 0;
+        margin: 0;
+      }
+      .layout article div{
+        min-height: 100px;
+      }
+      .layout {
+        margin-bottom: 100px;
+        min-height: 100px;
+      }
+
+    </style>
+  </head>
+  <body>
+
+<!-- 浮动布局解决方案 -->
+    <section class="layout float">
+
+      <style media="screen">
+        .layout.float .left{
+          float: left;
+          width: 300px;
+          background: red;
+        }
+        .layout.float .right{
+          float: right;
+          width: 300px;
+          background: blue;
+        }
+        .layout.float .center{
+          background: yellow;
+        }
+
+
+      </style>
+      <article class="left-right-center">
+        <div class="left">左栏</div>
+        <div class="right"> 右栏 </div>
+        <div class="center">
+          <h1>浮动解决方案</h1>
+          1. 这是三栏布局中间部分
+          2. 这是三栏布局中间部分
+        </div>
+
+
+
+
+      </article>
+    </section>
+
+<!-- 绝对定位布局解决方案 -->
+    <section class="layout absolute">
+      <style media="screen">
+        /* .layout.absolute{
+          position: relative;
+        }
+        这个位置并不需要为div 的父元素section 设置position reletive ,
+        因为absolute 定位在未设置left top 等时是按照其原来位置进行排列的
+        position会脱离文档流，所以有时会覆盖元素，
+        还有另一种做法，左右 绝对定位 ，center 不用绝对定位 用-margin 撑开
+        */
+        .layout.absolute {
+          position: relative;
+        }
+        .layout.absolute .left-center-right div{
+          position: absolute;
+        }
+
+        .layout.absolute .left{
+          left: 0px;
+          width:300px;
+          background: red;
+        }
+        .layout.absolute .center{
+          left: 300px;
+          right: 300px;
+          background: yellow;
+        }
+        .layout.absolute .right{
+          right: 0px;
+          width: 300px;
+          background: blue;
+
+        }
+            /*
+        .layout.absolute .center{
+
+          margin-left: 300px;
+          margin-right: 300px;
+          background: yellow;
+        } */
+
+
+
+      </style>
+      <article class="left-center-right">
+        <div class="left">左栏</div>
+        <div class="center">
+            <h1>绝对定位解决方案</h1>
+            1. 这是三栏布局中间部分
+            2. 这是三栏布局中间部分
+        </div>
+        <div class="right">右栏</div>
+
+
+      </article>
+    </section>
+
+<!-- flex布局解决方案 -->
+    <section class="layout flexbox">
+      <style media="screen">
+
+        .layout.flexbox .left-center-right {
+          display: flex;
+        }
+        /* .layout.flexbox{
+          margin-top: 140px;
+        } */
+        .layout.flexbox .left{
+          width:300px;
+          background: red;
+        }
+        .layout.flexbox .center{
+          flex: 1;
+          background: yellow;
+        }
+        .layout.flexbox .right{
+          width: 300px;
+          background: blue;
+        }
+
+
+
+      </style>
+      <article class="left-center-right">
+        <div class="left">左栏</div>
+        <div class="center">
+            <h1>flexbox解决方案</h1>
+            1. 这是三栏布局中间部分
+            2. 这是三栏布局中间部分
+        </div>
+        <div class="right">右栏</div>
+
+
+      </article>
+    </section>
+
+<!-- table 表格布局解决方案 -->
+    <section class="layout table">
+      <style media="screen">
+
+        .layout.table .left-center-right {
+          display: table;
+          width: 100%;
+          height:100px;   /* 这里不指定高度的话单元格高度就会和内容一致*/
+        }
+
+        .layout.table .left-center-right>div{
+          display: table-cell;
+        }
+        .layout.table .left{
+          width:300px;
+          background: red;
+        }
+        .layout.table .center{
+          background: yellow;
+        }
+        .layout.table .right{
+          width: 300px;
+          background: blue;
+        }
+
+
+
+      </style>
+      <article class="left-center-right">
+        <div class="left">左栏</div>
+        <div class="center">
+            <h1>table 布局解决方案</h1>
+            1. 这是三栏布局中间部分
+            2. 这是三栏布局中间部分
+        </div>
+        <div class="right">右栏</div>
+
+
+      </article>
+    </section>
+
+<!-- 网格 grid布局解决方案 -->
+    <section class="layout grid">
+      <style media="screen">
+
+        .layout.grid .left-center-right {
+          display: grid;
+          width: 100%;
+          grid-template-rows: 100px;
+          grid-template-columns: 300px auto 300px;
+        }
+
+        .layout.grid .left{
+          background: red;
+        }
+        .layout.grid .center{
+          background: yellow;
+        }
+        .layout.grid .right{
+          background: blue;
+        }
+
+
+
+      </style>
+      <article class="left-center-right">
+        <div class="left">左栏</div>
+        <div class="center">
+            <h1>grid布局解决方案</h1>
+            1. 这是三栏布局中间部分
+            2. 这是三栏布局中间部分
+        </div>
+        <div class="right">右栏</div>
+
+
+      </article>
+    </section>
+
+  </body>
+</html>
