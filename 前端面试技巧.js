@@ -71,6 +71,7 @@
         总结： 语义化，不要总是div基础知识扎实
         变通： 上下高度固定，中间自适应，两栏布局
 
+
     3.2 CSS 盒模型
         基本概念： 标准模型 + IE 模型  二者区别
         content padding border margin
@@ -92,32 +93,119 @@
 
 
     3.3 DOM 事件
-        基本概念: DOM 事件的级别
-                 DOM 事件模型
-                 DOM 事件流
-                 描述dom 事件捕获的具体流程
+            https://www.cnblogs.com/lvdabao/p/3265870.html
+            https://wangdoc.com/javascript/events/model.html#%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0
+            https://segmentfault.com/a/1190000007082623
+            基本概念:
+            1. DOM 事件的级别
+              DOM 0 element.onclick = function(){}
+              DOM 2 element.addEventListener('click', function(){}, false)  element.removeEventListener('click', function(){}, false)
+              DOM 3 element.addEventListener('keyup', function(){}, false) 在 DOM 2 的基础上新增了更多的事件类型
+
+            2. DOM 事件模型：三种
+                浏览器的事件模型，就是通过监听函数（listener）对事件做出反应。事件发生后，浏览器监听到了这个事件，就会执行对应的监听函数。这是事件驱动编程模式（event-driven）的主要编程方式。JavaScript 有三种方法，可以为事件绑定监听函数。
+
+                1. DOM 0 级事件模型，事件发生后没有传播的概念，没有事件流。
+                    事件发生，马上处理，完事，就这么简单。监听函数只是元素的一个属性值，通过指定元素的属性值来绑定监听器。书写方式有两种：
+      　　　        HTML代码中指定属性值：<input type=”button” onclick=”func1()” />
+      　　　　      在js代码中指定属性值：document.getElementsByTagName(‘input’)[0].onclick = func1
+                2. IE事件模型，目标+冒泡阶段，没有捕获（IE 8 之前）
+                      绑定监听函数attachEvent(eventType, handler)
+                      移除  attachEvent(eventType, handler)
+                3. DOM 2 级事件模型 捕获阶段-目标阶段-冒泡阶段
+
+            3. DOM 事件流
+
+                DOM2 级事件规定事件流包括三个阶段 捕获阶段》目标阶段》冒泡阶段
+
+            4. 描述dom 事件捕获的具体流程
+                window>document>element(html)>element(body)>div
+                冒泡相反
+            5. Event 对象的常见应用
+                event.preventDafault() 阻止标签的默认行为，比如说 a 标签， 可以阻止它的默认跳转行为。
+                event.stopPropagation() 阻止事件向父级传播 阻止冒泡
+                event.stopImmediatePropagation() 阻止该节点所有传播
+                event.currentTarget 绑定监听函数的节点
+                event.target        当前真正点击的节点
+            6 自定义事件
+            var eve = new Event('test'); //通过new Event 创建事件
+              ev.addEventListener('test', function () { //注册事件
+                  console.log('test dispatch');
+              });
+              setTimeout(function () {
+                  ev.dispatchEvent(eve);  //触发事件
+              }, 1000);
+
+              var eve = new CustomEvent('test')
+
 
     3.4 HTTP 协议类
 
         3.4.1 HTTP 协议主要特点
-              无连接 无状态 灵活 简单快速
+              无连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
+
         3.4.2 HTTP 协议报文组成
               请求报文 相应报文
-              1，请求行或者响应行  方法 协议版本  状态码
-              2，Header（请求的 Header 中 Host 字段是必须的，其他都是可选）
+              1，请求行或者  方法(get) 页面地址 协议版本
+              2，请求头 很多key-value 值，包括host, user-agent等等 Header（请求的 Header 中 Host 字段是必须的，其他都是可选）
+              3，\r\n\r\n（连续两个换行回车符，用来分隔Header和Body）
+              4，Body（可选）
+              相应报文
+              1，响应行 协议/版本(HTTP/1.1)  状态码  200 OK
+              2. 响应头
               3，\r\n\r\n（连续两个换行回车符，用来分隔Header和Body）
               4，Body（可选）
 
-        HTTP 协议方法   GET POST PUT  DELETE
-        GET POST 区别
-        HTTP 状态码
-          1 指示信息
-          2 成功 200 OK
-          3 重定向
-          4 客户端错误  403 访问被禁止 404  资源不存在
-          5 服务器错误
+        3.4.3 HTTP 协议方法
+                GET  获取资源
+                POST 传输资源
+                PUT  更新资源
+                DELETE 删除资源
+                HEAD  获取报文头部
 
-        持久连接 管线化
+        3.4.4 GET POST 区别
+                5. get把请求的数据放在url上，即HTTP协议头上，其格式为： 以?分割URL和传输数据，参数之间以&相连  数据如果是英文字母/数字，原样发送，
+                如果是空格，转换为+， 如果是中文/其他字符，则直接把字符串用BASE64加密，及“%”加上“字符串的16进制ASCII码”。
+                post把数据放在HTTP的包体内（requrest body）。
+
+                4. get 请求在url 中传送的参数有长度限制。提交的数据最大是2k（原则上url长度无限制，那么get提交的数据也没有限制咯？限制实际上取决于浏览器，(大多数)浏览器通常都会限制url长度在2K个字节，即使(大多数)服务器最多处理64K大小的url。也没有卵用。）。
+                post理论上没有限制。实际上IIS4中最大量为80KB，IIS5中为100KB。
+
+                GET产生一个TCP数据包，浏览器会把http header和data一并发送出去，服务器响应200(返回数据);
+                POST产生两个TCP数据包，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok(返回数据)。
+
+                1. GET在浏览器回退时是无害的，POST会再次提交请求。
+
+                2. GET请求会被浏览器主动cache，而POST不会，除非手动设置。
+
+                3. GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
+
+                GET产生的URL地址可以被Bookmark，而POST不可以。
+                GET请求只能进行url编码，而POST支持多种编码方式。
+                GET只接受ASCII字符的参数的数据类型，而POST没有限制
+
+
+
+
+        3.4.5 HTTP 状态码
+              1 指示信息- 请求已被接收，继续处理
+              2 成功    -  请求已被成功接收 200 OK
+              3 重定向  -  完成请求必须进行更进一步的操作
+              4 客户端错误  请求有语法错误，请求无法实现 403 访问被禁止 404  资源不存在
+              5 服务器错误  服务器未能实现合法的请求
+
+        3.4.6 持久连接 keep-alive
+        https://blog.csdn.net/Misszhoudandan/article/details/80967033
+            HTTP 1.1 支持持久连接
+            非持久连接时，每个请求/ 响应客户端和服务端都要新建一个连接，完成之后立即断开连接。（HTTP 是无连接的协议）
+
+            持久连接时，使客户端到服务端的连接持续有效，当出现对服务器的后继请求时，keep-alive避免了重新建立连接
+        3.4.7 管线化
+            在持久连接的情况下，某个连接上消息的传递类似于
+            请求1->响应1->请求2->响应2->请求3->响应3->
+            管线化   将多个HTTP请求整批发送，在发送过程中不用等待对方响应
+            请求1->请求2->请求3->响应1->响应2->响应3->
+
 
     3.5 原型链类
         创建对象的几种方法
