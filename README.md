@@ -1,6 +1,7 @@
 # FT-interview-skills
 
-1. 课程安排：                                             切忌浮躁！！！
+# 1. 课程安排：  切忌浮躁！！！#    
+此仓库整理自慕课网前端跳槽面试技巧
 
     1.1 模拟一面：
           面试技巧  页面布局类
@@ -27,18 +28,18 @@
           职业竞争力
           职业规划
 
-2. 面试准备
+# 2. 面试准备 #
     2.1 如何看待面试，面试究竟是什么？ 选拔 ？筛选？
     2.2 校招，社招的区别？ 知识，经验，能力
     2.3 一面 基础知识 二面 基本原理 三面   HR
     2.4 职位描述分析 (JD)
 
 
-3. 一面
+# 3. 一面 #
 
-    3.1 页面布局 见 layout.html
-        假设高度已知，请写出三栏布局，其中左栏，右栏宽度300px,中间自适应。
-        技术实现：float 绝对定位 grid 表格 flex
+## 3.1 页面布局 见 layout.html  ##
+
+ 假设高度已知，请写出三栏布局，其中左栏，右栏宽度300px,中间自适应。技术实现：float 绝对定位 grid 表格 flex
 
         3.1.1 float
           1. 左栏左浮动，固定宽度，右栏右浮动，固定宽度，中间不管。和书写顺序有关。
@@ -74,7 +75,8 @@
         变通： 上下高度固定，中间自适应，两栏布局
 
 
-    3.2 CSS 盒模型
+##  3.2 CSS 盒模型 ##
+
         基本概念： 标准模型 + IE 模型  二者区别
         content padding border margin
         IE模型 宽和高包括content padding border
@@ -94,10 +96,13 @@
           使用场景
 
 
-    3.3 DOM 事件
-            https://www.cnblogs.com/lvdabao/p/3265870.html
-            https://wangdoc.com/javascript/events/model.html#%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0
-            https://segmentfault.com/a/1190000007082623
+## 3.3 DOM 事件 ##
+
+[ https://www.cnblogs.com/lvdabao/p/3265870.html]( https://www.cnblogs.com/lvdabao/p/3265870.html)
+[ https://wangdoc.com/javascript/events/model.html#%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0]( https://wangdoc.com/javascript/events/model.html#%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0)
+[ https://segmentfault.com/a/1190000007082623]( https://segmentfault.com/a/1190000007082623)
+
+
             基本概念:
             1. DOM 事件的级别
               DOM 0 element.onclick = function(){}
@@ -141,7 +146,8 @@
               var eve = new CustomEvent('test')
 
 
-    3.4 HTTP 协议类
+##  3.4 HTTP 协议类 ##
+
 
         3.4.1 HTTP 协议主要特点
               无连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
@@ -208,18 +214,19 @@
             管线化   将多个HTTP请求整批发送，在发送过程中不用等待对方响应
             请求1->请求2->请求3->响应1->响应2->响应3->
 
+## 3.5 原型链类 ##
 
-    3.5 原型链类
         创建对象的几种方法
         原型 构造函数 实例 原型链
         instanceof 的原理
         new 运算符
 
-    3.6 面向对象类
+## 3.6 面向对象类 ##
 
 
 
-    3.7 通信类
+## 3.7 通信类 ##
+
         同源策略和限制
         协议 域名 端口 任一一个不一样都是跨域
 
@@ -227,4 +234,5 @@
         如何创建 AJAX
         跨域通信的几种方式
 
-    3.8 算法类 快排 选择 希尔
+
+##  3.8 算法类 快排 选择 希尔 ##
