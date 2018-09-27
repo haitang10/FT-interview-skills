@@ -215,9 +215,34 @@
             请求1->请求2->请求3->响应1->响应2->响应3->
 
 ## 3.5 原型链类 ##
+https://wangdoc.com/javascript/oop/new.html
+https://wangdoc.com/javascript/oop/prototype.html
+### 1.创建对象的几种方法 ###
+	  // 原型链指向Object
+	  var o1  = {name:'o1'}
+	  var o11 = new Object({name:'o11'})
+	  // 构造函数
+	  var M = functon(){this.name = 'o2'}
+	  var o2 = new M()
 
-        创建对象的几种方法
-        原型 构造函数 实例 原型链
+	  var P = {name:'o3'}
+	  var o3 = Object.create(P)
+    浏览器中输出结果
+    o1
+    {name: "o1"}name: "o1"__proto__: Object
+    o11
+    {name: "o11"}name: "o11"__proto__: Object
+    o2
+    M {name: "o2"}name: "o2"__proto__: Object
+    o3
+    {}
+
+###原型(prototype)构造函数 实例 原型链###
+object.prototype 是原型链的顶端
+函数才有prototype 对象没有
+实例对象有 __proto__ 函数也有
+凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
+
         instanceof 的原理
         new 运算符
 

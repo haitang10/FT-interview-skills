@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>原型链</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    // 1.字面量 原型链指向Object
+    var o1  = {name:'o1'}
+    var o11 = new Object({name:'o11'})
+    //2. 构造函数
+    var M = function(name) {this.name = name}
+    var o2 = new M('o2')
+    //
+    var P = {name:'o3'}
+    var o3 = Object.create(P)
+    </script>
+  </body>
+</html>
