@@ -253,11 +253,28 @@ object.prototype 是原型链的顶端
 ## 3.7 通信类 ##
 
         同源策略和限制
-        协议 域名 端口 任一一个不一样都是跨域
-
-        前后端如何通信 AJAX WebSocket CORS
+       协议 域名 端口 任一一个不一样都是跨域 
+       同源：同一个协议 域名 端口（默认80））
+       限制：不是一个源的文档无法操控另一个源的文档，表现在
+       cookie localStorage indexDB 无法获取
+       DOM 无法获得
+       AJAX请求无法获得（ajax只能同源通信）
+       
+        前后端如何通信 
+	AJAX 
+	WebSocket 不受同源策略限制
+	CORS     支持跨域通信，也支持同源
+	
         如何创建 AJAX
+	
         跨域通信的几种方式
+	JSONP
+	
+	Hash   URL里面#后面的部分  页面不刷新  search URL里面？后面的部分，页面会刷新
+	postMessage
+	WebSocket
+	CORS 在ajax请求加一个
+	
 
 
 ##  3.8 算法类 快排 选择 希尔 ##
