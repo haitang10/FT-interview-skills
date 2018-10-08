@@ -1,34 +1,34 @@
 # FT-interview-skills
 
-# 1. 课程安排：  切忌浮躁！！！#    
+# 1. 课程安排：  切忌浮躁！！！
 此仓库整理自慕课网前端跳槽面试技巧
 
-    1.1 模拟一面：
+##1.1 模拟一面：
           面试技巧  页面布局类
           CSS盒模型  DOM 事件类
           HTTP 协议  原型链
           面向对象  通信
           前端安全  前端算法
 
-    1.2 模拟二面：
+##1.2 模拟二面：
           面试技巧
           渲染机制
           js 运行机制
           页面性能
           错误监控
 
-    1.3 模拟三面：
+##1.3 模拟三面：
           面试技巧
           业务能力
           团队协作能力
           带人能力
 
-    1.4 模拟终面：
+##1.4 模拟终面：
           面试技巧
           职业竞争力
           职业规划
 
-# 2. 面试准备 #
+#2. 面试准备 
     2.1 如何看待面试，面试究竟是什么？ 选拔 ？筛选？
     2.2 校招，社招的区别？ 知识，经验，能力
     2.3 一面 基础知识 二面 基本原理 三面   HR
@@ -37,7 +37,7 @@
 
 # 3. 一面 #
 
-## 3.1 页面布局 见 layout.html  ##
+## 3.1 页面布局 见 layout.html
 
  假设高度已知，请写出三栏布局，其中左栏，右栏宽度300px,中间自适应。技术实现：float 绝对定位 grid 表格 flex
 
@@ -252,12 +252,70 @@ object.prototype 是原型链的顶端
 
 ## 3.7 通信类 ##
 
-        同源策略和限制
-        协议 域名 端口 任一一个不一样都是跨域
-
-        前后端如何通信 AJAX WebSocket CORS
-        如何创建 AJAX
-        跨域通信的几种方式
 
 
-##  3.8 算法类 快排 选择 希尔 ##
+- 同源策略和限制
+
+		协议 域名 端口 任一一个不一样都是跨域 
+		同源：同一个协议 域名 端口（默认80））
+		限制：不是一个源的文档无法操控另一个源的文档，表现在
+		cookie localStorage indexDB 无法获取
+		DOM 无法获得
+		AJAX请求无法获得（ajax只能同源通信）
+		   
+
+
+- 前后端如何通信 
+
+	AJAX 
+	WebSocket 不受同源策略限制
+	CORS     支持跨域通信，也支持同源
+
+
+
+- 如何创建 AJAX
+		
+
+
+- 跨域通信的几种方式
+
+	1. JSONP
+		
+			就是利用<script>标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。
+			当需要通讯时，本站脚本创建一个<script>元素，地址指向第三方的API网址，形如：    
+			<script src="http://www.example.net/api?param1=1&param2=2"></script>     
+			并提供一个回调函数来接收数据（函数名可约定，或通过地址参数传递）。     
+			第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如: callback({"name":"hax","gender":"Male"}) 
+			这样浏览器会调用callback函数，并传递解析后json对象作为参数。本站脚本可在callback函数里处理所传入的数据。
+			
+	2. Hash   URL里面#后面的部分  页面不刷新  search URL里面？后面的部分，页面会刷新
+
+	3. postMessage  跨域同于都可以 
+					[https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472](https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472)
+					[https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)
+
+	4. WebSocket  是一种网络通信协议，
+	不受同源策略限制
+		[http://www.ruanyifeng.com/blog/2017/05/websocket.html](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
+
+	5. CORS W3C新标准，它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制,目前所有浏览器都支持了
+	[http://www.ruanyifeng.com/blog/2016/04/cors.html](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+
+## 3.8 前端安全类
+
+[https://blog.csdn.net/adrianzqt/article/details/77801635?locationNum=8&fps=1](https://blog.csdn.net/adrianzqt/article/details/77801635?locationNum=8&fps=1)
+
+ CSRF  跨站请求伪造，Cross-site request forgery
+
+攻击原理是：A 网站某个接口存在漏洞，用户登录过A网站
+
+防御措施：
+ 	
+	Token验证  
+	Referer 验证 
+	隐藏令牌
+	
+XSS 跨域脚本攻击  cross-site scripting
+向页面注入js代码
+	
+##  3.9 算法类 快排 选择 希尔 ##
