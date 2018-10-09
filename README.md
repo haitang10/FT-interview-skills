@@ -317,24 +317,24 @@ XSS 跨域脚本攻击  cross-site scripting
 向页面注入js代码
 	
 ##  3.9 算法类 快排 选择 希尔 ##
-- 排序
-- 堆栈
+
+- 快速排序 选择排序希尔排序 
+	
+	[https://segmentfault.com/u/mangguowulidemao](https://segmentfault.com/u/mangguowulidemao)
+
+
+
+- 堆栈 队列 链表 ，树，图，见下链接
+
+	[http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html](http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html)
+	
+	[https://juejin.im/post/5b6c4976f265da0f4f1669ac](https://juejin.im/post/5b6c4976f265da0f4f1669ac)
+	
+	[https://juejin.im/entry/58330cbfa0bb9f005a0fed62](https://juejin.im/entry/58330cbfa0bb9f005a0fed62)
+	
+	[https://juejin.im/entry/58759e79128fe1006b48cdfd](https://juejin.im/entry/58759e79128fe1006b48cdfd)
+	
+
 - 递归
-- 波兰式和逆波兰式
-
-排序
-[https://segmentfault.com/u/mangguowulidemao](https://segmentfault.com/u/mangguowulidemao)
-
-快速排序 
-选择排序
-希尔排序
-堆栈 队列 链表
-
-[https://juejin.im/post/5b6c4976f265da0f4f1669ac](https://juejin.im/post/5b6c4976f265da0f4f1669ac)
-
-[https://juejin.im/entry/58330cbfa0bb9f005a0fed62](https://juejin.im/entry/58330cbfa0bb9f005a0fed62)
-
-[https://juejin.im/entry/58759e79128fe1006b48cdfd](https://juejin.im/entry/58759e79128fe1006b48cdfd)
-
-递归
-[https://segmentfault.com/a/1190000009857470](https://segmentfault.com/a/1190000009857470)
+	
+	[https://segmentfault.com/a/1190000009857470](https://segmentfault.com/a/1190000009857470)
