@@ -317,3 +317,24 @@ XSS 跨域脚本攻击  cross-site scripting
 向页面注入js代码
 	
 ##  3.9 算法类 快排 选择 希尔 ##
+- 排序
+- 堆栈
+- 递归
+- 波兰式和逆波兰式
+
+排序
+[https://segmentfault.com/u/mangguowulidemao](https://segmentfault.com/u/mangguowulidemao)
+
+快速排序 
+选择排序
+希尔排序
+堆栈 队列 链表
+
+[https://juejin.im/post/5b6c4976f265da0f4f1669ac](https://juejin.im/post/5b6c4976f265da0f4f1669ac)
+
+[https://juejin.im/entry/58330cbfa0bb9f005a0fed62](https://juejin.im/entry/58330cbfa0bb9f005a0fed62)
+
+[https://juejin.im/entry/58759e79128fe1006b48cdfd](https://juejin.im/entry/58759e79128fe1006b48cdfd)
+
+递归
+[https://segmentfault.com/a/1190000009857470](https://segmentfault.com/a/1190000009857470)
