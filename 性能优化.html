@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>性能优化</title>
+        <!-- defer 是在HTML解析完之后才会执行，如果是多个，按照加载的顺序执行，也就是说，遇到有defer标志的标签，先异步加载，等HTML解析完，按照加载时的顺序依次执行，
+	       2. async 是在加载完之后立即执行，如果是多个，执行顺序和加载顺序无关，也就是哪个先加载完，哪个先执行。
+           在async 1中增加vue源码，增加加载时间-->
+        <script src="./defer1.js" defer type="text/javascript"></script>
+        <script src="./defer2.js" defer type="text/javascript"></script>
+        <script src="./async1.js" defer type="text/javascript"></script>
+        <script src="./async2.js" defer type="text/javascript"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/jquery-3.1.1.min.js">
+        <style media="screen">
+            div{
+                background: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="">
+            test
+            <script type="text/javascript">
+                document.write('<span>write</span>')
+            </script>
+            <script type="text/javascript">
+                for (var i = 0; i < 20000; i++) {
+                   if(i % 2000 === 0) {
+                       console.log(i)
+                   }
+                }
+            </script>
+        </div>
+    </body>
+</html>
+
+<iframe src="http://haitang10.top/danmu_app/" width="" height=""></iframe>

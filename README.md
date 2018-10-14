@@ -1,34 +1,28 @@
 # FT-interview-skills
 
+
+# 1. 课程安排：  切忌浮躁！！！
+此仓库整理自慕课网前端跳槽面试技巧
+
+
 # 1. 课程安排：  切忌浮躁！！！
 此仓库整理自慕课网前端跳槽面试技巧
 
 ## 1.1 模拟一面：
-          面试技巧  页面布局类
-          CSS盒模型  DOM 事件类
-          HTTP 协议  原型链
-          面向对象  通信
-          前端安全  前端算法
+    面试技巧  页面布局类  CSS盒模型  DOM 事件类 HTTP 协议  
+	原型链    面向对象  通信  前端安全  数据结构和算法
 
 ## 1.2 模拟二面：
-          面试技巧
-          渲染机制
-          js 运行机制
-          页面性能
-          错误监控
+    面试技巧  渲染机制  js 运行机制  页面性能 错误监控
 
 ## 1.3 模拟三面：
-          面试技巧
-          业务能力
-          团队协作能力
-          带人能力
+    面试技巧  业务能力 团队协作能力  带人能力
 
 ## 1.4 模拟终面：
-          面试技巧
-          职业竞争力
-          职业规划
+    面试技巧  职业竞争力  职业规划
 
 # 2. 面试准备 
+
     2.1 如何看待面试，面试究竟是什么？ 选拔 ？筛选？
     2.2 校招，社招的区别？ 知识，经验，能力
     2.3 一面 基础知识 二面 基本原理 三面   HR
@@ -41,7 +35,7 @@
 
  假设高度已知，请写出三栏布局，其中左栏，右栏宽度300px,中间自适应。技术实现：float 绝对定位 grid 表格 flex
 
-        3.1.1 float
+### 3.1.1 float
           1. 左栏左浮动，固定宽度，右栏右浮动，固定宽度，中间不管。和书写顺序有关。
             需要注意的是 在写HTML 的时候一定要先写left div,再写right div ，最后写center div
             原因是浏览器解析HTML时按先后顺序，先写center的话因为center 默认display为block，占据一行，
@@ -51,7 +45,7 @@
           2. 中间设margin-left /right,左右采用-margin float, 左面margin-left：-100% 右面 margin-left：-300 px,目的就是浮动
             到上一行，HTML 书写顺序无关。
 
-        3.1.2 absolute 定位
+### 3.1.2 absolute 定位
           1. 左中右全部绝对定位，左右left right 为0中间不管,
               position 是相对于第一个非static元素进行定位的。会脱离常规流，所以有时会覆盖元素。
               这个位置并不需要为div 的父元素section 设置position reletive ,
@@ -61,23 +55,26 @@
               把 article 限定在section 里面
           2. 左右absolute，中间static，用margin撑开
 
-        3.1.3 flex 布局
+### 3.1.3 flex 布局
           参考 https://zhuanlan.zhihu.com/p/25303493
 
-        3.1.4  table 表格布局
+### 3.1.4  table 表格布局
 
-        3.1.5  grid 网格布局
+### 3.1.5  grid 网格布局
 
-        3.1.6 几种布局方式优缺点，float 书写顺序很重要，float和absolute 都可以结合margin，二者都会脱离文档流。
-              去掉高度一定的话，只有flex和table可以自适应
+### 3.1.6 几种布局方式优缺点，
+float 书写顺序很重要，float和absolute 都可以结合margin，二者都会脱离文档流。
+   
+去掉高度一定的话，只有flex和table可以自适应
 
-        总结： 语义化，不要总是div基础知识扎实
-        变通： 上下高度固定，中间自适应，两栏布局
+ 总结： 语义化，不要总是div基础知识扎实
+
+ 变通： 上下高度固定，中间自适应，两栏布局
 
 
 ##  3.2 CSS 盒模型 ##
 
-        基本概念： 标准模型 + IE 模型  二者区别
+### 基本概念： 标准模型 + IE 模型  二者区别
         content padding border margin
         IE模型 宽和高包括content padding border
         css 设置这两种模型  box-sizing: content-box /border-box
@@ -86,8 +83,7 @@
           dom.currentStyle.width/height 取到当前的渲染之后的（只有IE 支持）
           window.getComputedStyle(dom).width/height
 
-        边距margin 重叠
-        BFC(解决重叠，清除浮动)
+### 边距margin 重叠 , BFC(解决重叠，清除浮动),见 box.html
          https://zhuanlan.zhihu.com/p/25321647
          https://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/
           基本概念
@@ -149,11 +145,13 @@
 ##  3.4 HTTP 协议类 ##
 
 
-        3.4.1 HTTP 协议主要特点
-              无连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
+### 3.4.1 HTTP 协议主要特点
+无连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
 
-        3.4.2 HTTP 协议报文组成
-              请求报文 相应报文
+### 3.4.2 HTTP 协议报文组成
+
+  请求报文 相应报文
+
               1，请求行或者  方法(get) 页面地址 协议版本
               2，请求头 很多key-value 值，包括host, user-agent等等 Header（请求的 Header 中 Host 字段是必须的，其他都是可选）
               3，\r\n\r\n（连续两个换行回车符，用来分隔Header和Body）
@@ -164,14 +162,14 @@
               3，\r\n\r\n（连续两个换行回车符，用来分隔Header和Body）
               4，Body（可选）
 
-        3.4.3 HTTP 协议方法
+### 3.4.3 HTTP 协议方法
+
                 GET  获取资源
                 POST 传输资源
                 PUT  更新资源
                 DELETE 删除资源
                 HEAD  获取报文头部
-
-        3.4.4 GET POST 区别
+### 3.4.4 GET POST 区别
                 5. get把请求的数据放在url上，即HTTP协议头上，其格式为： 以?分割URL和传输数据，参数之间以&相连  数据如果是英文字母/数字，原样发送，
                 如果是空格，转换为+， 如果是中文/其他字符，则直接把字符串用BASE64加密，及“%”加上“字符串的16进制ASCII码”。
                 post把数据放在HTTP的包体内（requrest body）。
@@ -192,31 +190,33 @@
                 GET请求只能进行url编码，而POST支持多种编码方式。
                 GET只接受ASCII字符的参数的数据类型，而POST没有限制
 
+###3.4.5 HTTP 状态码
+        1 指示信息- 请求已被接收，继续处理
+        2 成功    -  请求已被成功接收 200 OK
+        3 重定向  -  完成请求必须进行更进一步的操作
+        4 客户端错误  请求有语法错误，请求无法实现 403 访问被禁止 404  资源不存在
+        5 服务器错误  服务器未能实现合法的请求
 
+### 3.4.6 持久连接 keep-alive
 
+[https://blog.csdn.net/Misszhoudandan/article/details/80967033](https://blog.csdn.net/Misszhoudandan/article/details/80967033)
 
-        3.4.5 HTTP 状态码
-              1 指示信息- 请求已被接收，继续处理
-              2 成功    -  请求已被成功接收 200 OK
-              3 重定向  -  完成请求必须进行更进一步的操作
-              4 客户端错误  请求有语法错误，请求无法实现 403 访问被禁止 404  资源不存在
-              5 服务器错误  服务器未能实现合法的请求
+	 HTTP 1.1 支持持久连接  1.0 不支持
+     非持久连接时，每个请求/ 响应客户端和服务端都要新建一个连接，完成之后立即断开连接。（HTTP 是无连接的协议）
+	 持久连接时，使客户端到服务端的连接持续有效，当出现对服务器的后继请求时，keep-alive避免了重新建立连接
+### 3.4.7 管线化
 
-        3.4.6 持久连接 keep-alive
-        https://blog.csdn.net/Misszhoudandan/article/details/80967033
-            HTTP 1.1 支持持久连接
-            非持久连接时，每个请求/ 响应客户端和服务端都要新建一个连接，完成之后立即断开连接。（HTTP 是无连接的协议）
-
-            持久连接时，使客户端到服务端的连接持续有效，当出现对服务器的后继请求时，keep-alive避免了重新建立连接
-        3.4.7 管线化
             在持久连接的情况下，某个连接上消息的传递类似于
             请求1->响应1->请求2->响应2->请求3->响应3->
             管线化   将多个HTTP请求整批发送，在发送过程中不用等待对方响应
             请求1->请求2->请求3->响应1->响应2->响应3->
 
 ## 3.5 原型链类 ##
-https://wangdoc.com/javascript/oop/new.html
-https://wangdoc.com/javascript/oop/prototype.html
+
+[https://wangdoc.com/javascript/oop/new.html](https://wangdoc.com/javascript/oop/new.html)
+
+[https://wangdoc.com/javascript/oop/prototype.html](https://wangdoc.com/javascript/oop/prototype.html)
+
 ### 1.创建对象的几种方法 ###
 	  // 原型链指向Object
 	  var o1  = {name:'o1'}
@@ -252,7 +252,7 @@ object.prototype 是原型链的顶端
 
 ## 3.7 通信类 ##
 
-- 同源策略和限制
+### 同源策略和限制
 
 		协议 域名 端口 任一一个不一样都是跨域 
 		同源：同一个协议 域名 端口（默认80））
@@ -263,7 +263,7 @@ object.prototype 是原型链的顶端
 		   
 
 
-- 前后端如何通信 
+### 前后端如何通信 
 
 	AJAX 
 	WebSocket 不受同源策略限制
@@ -271,13 +271,13 @@ object.prototype 是原型链的顶端
 
 
 
-- 如何创建 AJAX
+### 如何创建 AJAX
 		
 
 
-- 跨域通信的几种方式
+### 跨域通信的几种方式
 
-	1. JSONP
+1. JSONP
 		
 			就是利用<script>标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。
 			当需要通讯时，本站脚本创建一个<script>元素，地址指向第三方的API网址，形如：    
@@ -286,24 +286,27 @@ object.prototype 是原型链的顶端
 			第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如: callback({"name":"hax","gender":"Male"}) 
 			这样浏览器会调用callback函数，并传递解析后json对象作为参数。本站脚本可在callback函数里处理所传入的数据。
 			
-	2. Hash   URL里面#后面的部分  页面不刷新  search URL里面？后面的部分，页面会刷新
+2. Hash   URL里面#后面的部分  页面不刷新  search URL里面？后面的部分，页面会刷新
 
-	3. postMessage  跨域同于都可以 
-					[https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472](https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472)
-					[https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)
+3. postMessage  跨域同于都可以 
+	
+	[https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472](https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472)
+	
+	[https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)
 
-	4. WebSocket  是一种网络通信协议，
+4. WebSocket  是一种网络通信协议，
 	不受同源策略限制
 		[http://www.ruanyifeng.com/blog/2017/05/websocket.html](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 
-	5. CORS W3C新标准，它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制,目前所有浏览器都支持了
+5. CORS W3C新标准，它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制,目前所有浏览器都支持了
+
 	[http://www.ruanyifeng.com/blog/2016/04/cors.html](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 
 ## 3.8 前端安全类
 
 [https://blog.csdn.net/adrianzqt/article/details/77801635?locationNum=8&fps=1](https://blog.csdn.net/adrianzqt/article/details/77801635?locationNum=8&fps=1)
 
- CSRF  跨站请求伪造，Cross-site request forgery
+### CSRF  跨站请求伪造，Cross-site request forgery
 
 攻击原理是：A 网站某个接口存在漏洞，用户登录过A网站
 
@@ -313,18 +316,20 @@ object.prototype 是原型链的顶端
 	Referer 验证 
 	隐藏令牌
 	
-XSS 跨域脚本攻击  cross-site scripting
+### XSS 跨域脚本攻击  cross-site scripting
 向页面注入js代码
 	
-##  3.9 算法类 快排 选择 希尔 ##
+##  3.9 数据结构和算法类  ##
 
-- 快速排序 选择排序希尔排序 
+
+
+### 快速排序 选择排序希尔排序 
 	
 	[https://segmentfault.com/u/mangguowulidemao](https://segmentfault.com/u/mangguowulidemao)
 
 
 
-- 堆栈 队列 链表 ，树，图，见下链接
+### 堆栈 队列 链表 ，树，图，见下链接
 
 	[http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html](http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html)
 	
@@ -335,6 +340,36 @@ XSS 跨域脚本攻击  cross-site scripting
 	[https://juejin.im/entry/58759e79128fe1006b48cdfd](https://juejin.im/entry/58759e79128fe1006b48cdfd)
 	
 
-- 递归
+### 递归
 	
 	[https://segmentfault.com/a/1190000009857470](https://segmentfault.com/a/1190000009857470)
+
+----------
+
+# 4. 二面 
+
+## 渲染机制 
+### 什么是DOCTYPE 和作用
+
+		DTD 告诉浏览器我是什么文档类型
+		DOCTYPE 声明文档类型，告诉浏览器当前DTD，浏览器根据这个选择哪个引擎来解析渲染
+		HTML 5 
+		<!DOCTYPE HTML>
+		HTML 4.0 两个版本 
+		严格模式和传统模式
+
+### 浏览器渲染过程，快速简洁把事情描述清楚
+
+[https://yuchengkai.cn/docs/zh/frontend/browser.html#%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6](https://yuchengkai.cn/docs/zh/frontend/browser.html#%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6)
+
+浏览器的渲染机制一般分为以下几个步骤
+	
+		1. 处理 HTML 并构建 DOM 树。
+		2. 处理 CSS 构建 CSSOM 树。
+		3. 将 DOM 与 CSSOM 合并成一个渲染树。render tree
+		4. 根据渲染树来布局，计算每个节点的位置。
+		5. 调用 GPU 绘制，合成图层，显示在屏幕上。
+
+### reflow 
+### repaint 
+### 布局Layout
