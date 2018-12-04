@@ -51,7 +51,48 @@
 
 
 
+      </article>
+    </section>
+<!-- 浮动布局解决方案 2-->
+    <section class="layout float-2">
 
+      <style media="screen">
+
+      .layout.float-2 .center-body{
+          float:left;
+          width: 100%;
+      }
+      .layout.float-2 .center{
+          margin: 0 300px;
+          background: yellow;
+      }
+
+        .layout.float-2 .left{
+          float:left;
+          margin-left: -100%;
+          width: 300px;
+          background: red;
+        }
+        .layout.float-2 .right{
+          float: left;
+          width: 300px;
+          background: blue;
+          margin-left: -300px;
+        }
+
+
+      </style>
+      <article class="left-right-center">
+          <div class="center-body">
+              <div class="center">
+                <h1>浮动解决方案2</h1>
+                1. 这是三栏布局中间部分
+                2. 这是三栏布局中间部分
+              </div>
+          </div>
+
+          <div class="left">左栏</div>
+          <div class="right"> 右栏 </div>
       </article>
     </section>
 

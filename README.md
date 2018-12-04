@@ -54,23 +54,25 @@ GitHub 地址
  假设高度已知，请写出三栏布局，其中左栏，右栏宽度300px,中间自适应。技术实现：float 绝对定位 grid 表格 flex
 
 ### 1. float
-    1. 左栏左浮动，固定宽度，右栏右浮动，固定宽度，中间不管。和书写顺序有关。
+    1. 左栏左浮动，固定宽度，右栏右浮动，固定宽度，中间不管。和书写顺序有关。左右中
        需要注意的是 在写HTML 的时候一定要先写left div,再写right div ，最后写center div
        原因是浏览器解析HTML时按先后顺序，先写center的话因为center 默认display为block，占据一行，
        接下来解析 right div 的css float right 会在下一行的右端浮动，而不是这一行！！！
        当然可以令right 部分float的margin-left 为-300 px,
 
-    2. 中间设margin-left /right,左右采用-margin float, 左面margin-left：-100% 右面 
-       margin-left：-300 px,目的就是浮动到上一行，HTML 书写顺序无关。
+    2. 中间float:left，margin-left /right = 300px,左右float：left, margin 为-100%和-300px, 
+       目的就是浮动到上一行，书写顺序有关，中左右,并且还要把中间那栏用一个div包裹
 
 ### 2. absolute 定位
-    1. 左中右全部绝对定位，左右left right 为0中间不管,
+    1. 左中右全部绝对定位，左右left right 为0,中间left,right为300px,元素顺序无所谓
         position 是相对于第一个非static元素进行定位的。会脱离常规流，所以有时会覆盖元素。
         这个位置并不需要为div 的父元素section 设置position reletive ,
         因为absolute 定位在未设置left top 等属性时是按照其原来位置进行排列的。指定了就是相对于body
         详细情况见 https://www.jianshu.com/p/a3da5e27d22b
+		所以不给section加relative 属性时，三栏还是在这一行，但是已经不占据空间了，后面的section会看不到，
         但是考虑到之后的section ，最好还是给 absolute section 增加 position relative 属性
         把 article 限定在section 里面
+
     2. 左右absolute，中间static，用margin撑开
 
 ### 3. flex 布局
