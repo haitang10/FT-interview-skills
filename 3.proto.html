@@ -6,13 +6,13 @@
   </head>
   <body>
     <script type="text/javascript">
-    // 1.字面量 原型链指向Object
+    // 1.通过字面量 原型链指向Object
     var o1  = {name:'o1'}
     var o11 = new Object({name:'o11'})
-    //2. 构造函数
+    //2. 通过构造函数
     var M = function(name) {this.name = name}
     var o2 = new M('o2')
-    //
+    // 3. 通过Object.create() 方法
     var P = {name:'o3'}
     var o3 = Object.create(P)
     </script>

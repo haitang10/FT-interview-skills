@@ -243,15 +243,17 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 [https://wangdoc.com/javascript/oop/prototype.html](https://wangdoc.com/javascript/oop/prototype.html)
 
 ### 1.创建对象的几种方法 ###
-	  // 原型链指向Object
+	  // 原型链指向Object，字面量的方式
 	  var o1  = {name:'o1'}
 	  var o11 = new Object({name:'o11'})
-	  // 构造函数
-	  var M = functon(){this.name = 'o2'}
-	  var o2 = new M()
 
+	  // 构造函数
+	  var M = function(){this.name = 'o2'}
+	  var o2 = new M()
+	 // 利用 Object,create()，以P为原型，生成实例对象
 	  var P = {name:'o3'}
 	  var o3 = Object.create(P)
+	// o3 本身没有name属性，name是在他的原型 P上的
     浏览器中输出结果
     o1
     {name: "o1"}name: "o1"__proto__: Object
@@ -262,14 +264,72 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
     o3
     {}
 
-###原型(prototype)构造函数 实例 原型链###
-object.prototype 是原型链的顶端
-函数才有prototype 对象没有
-实例对象有 __proto__ 函数也有
-凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
+###2. 原型(prototype)构造函数 实例 原型链###
 
-        instanceof 的原理
-        new 运算符
+![](http://haitang10-blog.oss-cn-beijing.aliyuncs.com/18-12-13/96056899.jpg)
+	
+	- 函数才有prototype属性， 对象没有
+	- 函数的原型对象有一个constructor属性，指向构造函数
+	- 构造函数通过new,在其原型对象的基础上产生一个实例，
+	- 实例对象没有prototype属性，但是有__proto__属性，指向函数的原型对象
+	- object.prototype 是原型链的顶端
+	
+	- 实例对象有 __proto__ 属性，指向函数的prototype,函数也有 
+	- 函数也有__proto__ 属性  M.__proto__ === Function.prototype // true
+	- 凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
+	-
+
+### 3. instanceof 的原理
+
+	用来判断一个对象是否是一个构造函数的实例，
+	根本在于判断构造函数的原型对象（prototype属性）是否在这个实例对象的原型链上，
+	也就是实例对象的—__proto__ 属性和 构造函数的prototype属性是否引用的同一个地址
+		
+	M.prototype.__proto__ === Object.prototype // true
+	o2 instanceof Object //true 
+	用instanceof判断实例对象的构造函数时不严谨，所以要用constructor属性确认，
+	o2.__proto__.constuctor === M //true
+	o2.__proto__.constuctor === Object //false
+
+	再直接一点利用 Object.getPrototypeOf(o2).constructor === M / Object 判断
+        
+
+
+### 4. new 运算符
+
+3. new的原理，它后面的函数依次执行下面的步骤：
+            1. 创建一个空对象，作为将要返回的对象实例。
+            2. 将空对象的原型指向构造函数的prototype属性。
+            3. 开始执行构造函数
+            4. 将这个空对象赋值给函数内部的this关键字。
+            4. 继续执行构造函数内部的代码。
+            5. 构造函数如果return另一个对象，new的结果是这个对象
+
+            
+也就是说，构造函数内部，this指的是一个新生成的空对象，所有针对this的操作，都会发生在这个空对象上。
+构造函数之所以叫“构造函数”，就是说这个函数的目的，就是操作一个空对象（即this对象），将其“构造”为需要的样子。
+
+如果return语句返回的是一个跟this无关的新对象，new命令会返回这个新对象，而不是this对象。这一点需要特别引起注意。
+
+        var Vehicle = function (){
+          this.price = 1000;
+          return { price: 2000 };
+        };
+
+        (new Vehicle()).price
+        // 2000
+上面代码中，构造函数Vehicle的return语句，返回的是一个新对象。new命令会返回这个对象，而不是this对象。
+
+用代码表示，其中fun 为构造函数，类比于M
+
+	var new2 = function(fun) {
+		// 1.创建一个空对象，作为将要返回的对象实例。
+        //2. 将空对象的原型指向构造函数的prototype属性。
+		var o = Object.create(fun.prototype) 
+		// 开始执行函数，并绑定this
+		var k = fun.call(o)  
+		return ((typeof k === "object") ? k : o)
+	}
 
 ## 3.6 面向对象类 ##
 
