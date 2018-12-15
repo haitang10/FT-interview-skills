@@ -236,11 +236,12 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
      管线化   将多个HTTP请求整批发送，在发送过程中不用等待对方响应
      请求1->请求2->请求3->响应1->响应2->响应3->
 
-## 3.5 原型链类 ##
+## 3.5 原型链类 2018.12.13 更新##
 
 [https://wangdoc.com/javascript/oop/new.html](https://wangdoc.com/javascript/oop/new.html)
 
 [https://wangdoc.com/javascript/oop/prototype.html](https://wangdoc.com/javascript/oop/prototype.html)
+
 
 ### 1.创建对象的几种方法 ###
 	  // 原型链指向Object，字面量的方式
@@ -330,6 +331,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 		var k = fun.call(o)  
 		return ((typeof k === "object") ? k : o)
 	}
+
 
 ## 3.6 面向对象类 ##
 
