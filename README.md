@@ -37,7 +37,7 @@ GitHub 地址
 
 ----------
 
-# 2. 面试准备 
+# 2. 面试准备
 
     2.1 如何看待面试，面试究竟是什么？ 选拔 ？筛选？
     2.2 校招，社招的区别？ 知识，经验，能力
@@ -60,7 +60,7 @@ GitHub 地址
        接下来解析 right div 的css float right 会在下一行的右端浮动，而不是这一行！！！
        当然可以令right 部分float的margin-left 为-300 px,
 
-    2. 中间float:left，margin-left /right = 300px,左右float：left, margin 为-100%和-300px, 
+    2. 中间float:left，margin-left /right = 300px,左右float：left, margin 为-100%和-300px,
        目的就是浮动到上一行，书写顺序有关，中左右,并且还要把中间那栏用一个div包裹
 
 ### 2. absolute 定位
@@ -135,11 +135,11 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
        事件发生，马上处理，完事，就这么简单。监听函数只是元素的一个属性值，通过指定元素的属性值来绑定监听器。书写方式有两种：
        HTML代码中指定属性值：<input type=”button” onclick=”func1()” />
        在js代码中指定属性值：document.getElementsByTagName(‘input’)[0].onclick = func1
-                
+
 	2. IE事件模型，目标+冒泡阶段，没有捕获（IE 8 之前）
        绑定监听函数attachEvent(eventType, handler)
        移除  attachEvent(eventType, handler)
-                
+
 	3. DOM 2 级事件模型 捕获阶段-目标阶段-冒泡阶段
 
 ### 3. DOM 事件流
@@ -268,14 +268,14 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 ###2. 原型(prototype)构造函数 实例 原型链###
 
 ![](http://haitang10-blog.oss-cn-beijing.aliyuncs.com/18-12-13/96056899.jpg)
-	
+
 	- 函数才有prototype属性， 对象没有
 	- 函数的原型对象有一个constructor属性，指向构造函数
 	- 构造函数通过new,在其原型对象的基础上产生一个实例，
 	- 实例对象没有prototype属性，但是有__proto__属性，指向函数的原型对象
 	- object.prototype 是原型链的顶端
-	
-	- 实例对象有 __proto__ 属性，指向函数的prototype,函数也有 
+
+	- 实例对象有 __proto__ 属性，指向函数的prototype,函数也有
 	- 函数也有__proto__ 属性  M.__proto__ === Function.prototype // true
 	- 凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
 	-
@@ -285,15 +285,15 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 	用来判断一个对象是否是一个构造函数的实例，
 	根本在于判断构造函数的原型对象（prototype属性）是否在这个实例对象的原型链上，
 	也就是实例对象的—__proto__ 属性和 构造函数的prototype属性是否引用的同一个地址
-		
+
 	M.prototype.__proto__ === Object.prototype // true
-	o2 instanceof Object //true 
+	o2 instanceof Object //true
 	用instanceof判断实例对象的构造函数时不严谨，所以要用constructor属性确认，
 	o2.__proto__.constuctor === M //true
 	o2.__proto__.constuctor === Object //false
 
 	再直接一点利用 Object.getPrototypeOf(o2).constructor === M / Object 判断
-        
+
 
 
 ### 4. new 运算符
@@ -306,7 +306,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
             4. 继续执行构造函数内部的代码。
             5. 构造函数如果return另一个对象，new的结果是这个对象
 
-            
+
 也就是说，构造函数内部，this指的是一个新生成的空对象，所有针对this的操作，都会发生在这个空对象上。
 构造函数之所以叫“构造函数”，就是说这个函数的目的，就是操作一个空对象（即this对象），将其“构造”为需要的样子。
 
@@ -326,58 +326,64 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 	var new2 = function(fun) {
 		// 1.创建一个空对象，作为将要返回的对象实例。
         //2. 将空对象的原型指向构造函数的prototype属性。
-		var o = Object.create(fun.prototype) 
+		var o = Object.create(fun.prototype)
 		// 开始执行函数，并绑定this
 		var k = fun.call(o)  
 		return ((typeof k === "object") ? k : o)
 	}
 
 
-## 3.6 面向对象类 ##
+## 3.6 面向对象类 12.15 更新 见oop.html ##
 
+### 1. 类和实例
 
+### 2. 类和继承,5种方法
 
 ## 3.7 通信类 ##
 
 ### 1.同源策略和限制
-	协议 域名 端口 任一一个不一样都是跨域 
 	同源：同一个协议 域名 端口（默认80））
+	协议 域名 端口 任一一个不一样都是跨域
+
 	限制：不是一个源的文档无法操控另一个源的文档，表现在
 	cookie localStorage indexDB 无法获取
 	DOM 无法获得
 	AJAX请求无法获得（ajax只能同源通信）
-		   
 
+### 2.前后端如何通信
 
-### 2.前后端如何通信 
-
-	AJAX 
+	AJAX （同源通信）
 	WebSocket 不受同源策略限制
 	CORS     支持跨域通信，也支持同源
 
-
-
-### 3.如何创建 AJAX
-		
+### 3.如何创建 AJAX  见 ajax.js
+	XMLHttpRequest 对象的工作流程
+        1. 创建XMLHttpRequest 实例
+        2. 发送http请求
+        3. 接受并处理服务器传回的数据
+        4. 更新网页数据
+	兼容性处理
+	事件的触发条件
+	事件的触发顺序
 
 
 ### 4.跨域通信的几种方式  10.7 更新
 
 1. JSONP
-		
+
 		就是利用<script>标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。
 		当需要通讯时，本站脚本创建一个<script>元素，地址指向第三方的API网址，形如：    
 		<script src="http://www.example.net/api?param1=1&param2=2"></script>     
 		并提供一个回调函数来接收数据（函数名可约定，或通过地址参数传递）。     
-		第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如: callback({"name":"hax","gender":"Male"}) 
+		第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如: callback({"name":"hax","gender":"Male"})
 		这样浏览器会调用callback函数，并传递解析后json对象作为参数。本站脚本可在callback函数里处理所传入的数据。
-			
+
 2. Hash   URL里面#后面的部分  页面不刷新  search URL里面？后面的部分，页面会刷新
 
-3. postMessage  跨域同于都可以 
-	
+3. postMessage  跨域同于都可以
+
 	[https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472](https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472)
-	
+
 	[https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)
 
 4. WebSocket  是一种网络通信协议，
@@ -397,20 +403,20 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 攻击原理是：A 网站某个接口存在漏洞，用户登录过A网站
 
 防御措施：
- 	
+
 	Token验证  
-	Referer 验证 
+	Referer 验证
 	隐藏令牌
-	
+
 ### 2.XSS 跨域脚本攻击  cross-site scripting
 向页面注入js代码
-	
-##  3.9 数据结构和算法类  ## 
+
+##  3.9 数据结构和算法类  ##
 
 10.09 更新
 
-### 快速排序 选择排序希尔排序 
-	
+### 快速排序 选择排序希尔排序
+
 [https://segmentfault.com/u/mangguowulidemao](https://segmentfault.com/u/mangguowulidemao)
 
 
@@ -418,30 +424,30 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 ### 堆栈 队列 链表 ，树，图，见下链接
 
 [http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html](http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95(%E4%B8%80).html)
-	
+
 [https://juejin.im/post/5b6c4976f265da0f4f1669ac](https://juejin.im/post/5b6c4976f265da0f4f1669ac)
-	
+
 [https://juejin.im/entry/58330cbfa0bb9f005a0fed62](https://juejin.im/entry/58330cbfa0bb9f005a0fed62)
-	
+
 [https://juejin.im/entry/58759e79128fe1006b48cdfd](https://juejin.im/entry/58759e79128fe1006b48cdfd)
-	
+
 
 ### 递归
-	
+
 [https://segmentfault.com/a/1190000009857470](https://segmentfault.com/a/1190000009857470)
 
 ----------
 # 4. 二面   10.14更新
 
-## 4.1 渲染机制 
+## 4.1 渲染机制
 [https://wangdoc.com/javascript/bom/engine.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90](https://wangdoc.com/javascript/bom/engine.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90)
 ### 1.什么是DOCTYPE 和作用
 
 		DTD 告诉浏览器我是什么文档类型
 		DOCTYPE 声明文档类型，告诉浏览器当前DTD，浏览器根据这个选择哪个引擎来解析渲染
-		HTML 5 
+		HTML 5
 		<!DOCTYPE HTML>
-		HTML 4.0 两个版本 
+		HTML 4.0 两个版本
 		严格模式和传统模式
 
 ### 2.浏览器渲染过程，快速简洁把事情描述清楚
@@ -454,7 +460,7 @@ js会阻塞dom树解析和渲染
 css加载不会阻塞DOM树的解析
 css加载会阻塞DOM树的渲染
 css加载会阻塞后面js语句的执行、
-	
+
 		1. 处理 HTML 并构建 DOM 树。
 		2. 处理 CSS 构建 CSSOM 树。
 		3. 将 DOM 与 CSSOM 合并成一个渲染树。render tree
@@ -470,7 +476,7 @@ css加载会阻塞后面js语句的执行、
 - 它们都具有阻塞效应，并且会耗费很多时间和计算资源。
 - 回流必定会发生重绘，重绘不一定会引发回流。回流所需的成本比重绘高的多，改变深层次的节点很可能导致父节点的一系列回流。
 
-触发reflow 
+触发reflow
 
 - 增加，删除，修改dom节点
 - 移动dom位置，或者搞一个动画
@@ -479,8 +485,8 @@ css加载会阻塞后面js语句的执行、
 - 添加或删除样式，display： none position
 - 定位或者浮动
 
-优化技巧 
-	
+优化技巧
+
 	读取 DOM 或者写入 DOM，尽量写在一起，不要混杂。不要读取一个 DOM 节点，然后立刻写入，接着再读取一个 DOM 节点。
 	缓存 DOM 信息。
 	不要一项一项地改变样式，而是使用 CSS class 一次性改变样式。
@@ -489,12 +495,12 @@ css加载会阻塞后面js语句的执行、
 	只在必要时才显示隐藏元素。
 	使用window.requestAnimationFrame()，因为它可以把代码推迟到下一次重流时执行，而不是立即要求页面重流。
 	使用虚拟 DOM（virtual DOM）库。
-	
+
 ### 4.布局Layout
 
 ----------
 
-## 4.2 js运行机制 
+## 4.2 js运行机制
 
 [https://wangdoc.com/javascript/async/general.html#%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B](https://wangdoc.com/javascript/async/general.html#%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B)
 
@@ -516,7 +522,7 @@ css加载会阻塞后面js语句的执行、
 举例来说，Ajax 操作可以当作同步任务处理，也可以当作异步任务处理，由开发者决定。如果是同步任务，主线程就等着 Ajax 操作返回结果，再往下执行；如果是异步任务，主线程在发出 Ajax 请求以后，就直接往下执行，等到 Ajax 操作有了结果，主线程再执行对应的回调函数。
 
 异步任务：
-setTimeout and setinterval 
+setTimeout and setinterval
 DOM 事件 addEventListener，点击按钮拉住了，因为主线程，执行栈不空
 ES 6 中 的promise
 
@@ -582,13 +588,13 @@ css 加载阻塞js执行，js执行又会阻塞dom树解析，
 	<"link" rel="dns-prefetch" href="//host_name_to_prefetch.com">
 	2. meta 标签，强制开启a标签dns预解析
 	<meta http-equiv="x-dns-prefetch-control" content="on">
-	
+
 ### 3. 异步加载 ，见 性能优化.html
-1. 异步加载的方式 
+1. 异步加载的方式
 	1. 动态脚本加载，即动态创建script标签
 	2. defer
 	3. async 使用另一个进程下载脚本，下载时不会阻塞渲染
-	4. 
+	4.
 		浏览器开始解析 HTML 网页。
 		解析过程中，发现带有async属性的script标签。
 		浏览器继续往下解析 HTML 网页，同时并行下载<script>标签中的外部脚本。
@@ -611,7 +617,7 @@ css 加载阻塞js执行，js执行又会阻塞dom树解析，
 		Last-Modified: 上次修改的时间，服务器发的响应头
 		if-Modified-Since : 浏览器响应头的key，过期时间到了，浏览器会跟服务端验证修改时间
 		缺点是有可能资源的内容不变但是修改时间变了，这样会重新向服务器获取资源，造成浪费
-		Etag： 由资源内容计算而得，服务器发给浏览器 
+		Etag： 由资源内容计算而得，服务器发给浏览器
 		if-None-Match ；浏览器发送http请求的时候
 
 ## 4.4 错误监控
@@ -639,17 +645,17 @@ css 加载阻塞js执行，js执行又会阻塞dom树解析，
 2. 资源加载错误（不会冒泡）  
 
 		object.onerror(节点上绑定error事件)
-		performance.getEntries 
+		performance.getEntries
 		Error 事件捕获   
 		window.addEventListener('error', function(e) {
-			console.log('捕获', e)	
+			console.log('捕获', e)
 		)
-		 
+
 ### 3.上报错误的基本原理
 通常可以通过 img 标签的 src 发起一个请求
 
 ----------
-## 5.三面 
+## 5.三面
 
 
 
