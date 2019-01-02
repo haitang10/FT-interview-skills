@@ -167,10 +167,10 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 
 
 ##  3.4 HTTP 协议类 ##
-
+https://www.zhihu.com/search?type=content&q=http%20%E6%97%A0%E8%BF%9E%E6%8E%A5
 
 ### 1. HTTP 协议主要特点
-无连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
+面向连接短连接（连接一次就会断掉）无状态(无法区分两次连接的身份)灵活 简单快速
 
 ### 2. HTTP 协议报文组成
 
@@ -227,7 +227,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 [https://blog.csdn.net/Misszhoudandan/article/details/80967033](https://blog.csdn.net/Misszhoudandan/article/details/80967033)
 
 	 HTTP 1.1 支持持久连接  1.0 不支持
-     非持久连接时，每个请求/ 响应客户端和服务端都要新建一个连接，完成之后立即断开连接。（HTTP 是无连接的协议）
+     非持久连接时，每个请求/ 响应客户端和服务端都要新建一个连接，完成之后立即断开连接。（HTTP 是面向连接，短连接的协议）
 	 持久连接时，使客户端到服务端的连接持续有效，当出现对服务器的后继请求时，keep-alive避免了重新建立连接
 ### 7. 管线化
 
@@ -235,6 +235,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
      请求1->响应1->请求2->响应2->请求3->响应3->
      管线化   将多个HTTP请求整批发送，在发送过程中不用等待对方响应
      请求1->请求2->请求3->响应1->响应2->响应3->
+
 
 ## 3.5 原型链类 2018.12.13 更新##
 
@@ -264,7 +265,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
     M {name: "o2"}name: "o2"__proto__: Object
     o3
     {}
-
+通过构造函数为实例对象定义属性，虽然很方便，但是有一个缺点。同一个构造函数的多个实例之间，无法共享属性，从而造成对系统资源的浪费。
 ###2. 原型(prototype)构造函数 实例 原型链###
 
 ![](http://haitang10-blog.oss-cn-beijing.aliyuncs.com/18-12-13/96056899.jpg)
@@ -278,7 +279,7 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 	- 实例对象有 __proto__ 属性，指向函数的prototype,函数也有
 	- 函数也有__proto__ 属性  M.__proto__ === Function.prototype // true
 	- 凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
-	-
+
 
 ### 3. instanceof 的原理
 
@@ -339,22 +340,21 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 
 ### 2. 类和继承,5种方法
 
-## 3.7 通信类 ##
-
+## 3.7 通信类 2019.1.2 update##
+https://wangdoc.com/javascript/bom/same-origin.html
 ### 1.同源策略和限制
-	同源：同一个协议 域名 端口（默认80））
-	协议 域名 端口 任一一个不一样都是跨域
-
+	同源：同一个协议 域名 端口（默认80））协议 域名 端口 任一一个不一样都是跨域
 	限制：不是一个源的文档无法操控另一个源的文档，表现在
 	cookie localStorage indexDB 无法获取
 	DOM 无法获得
-	AJAX请求无法获得（ajax只能同源通信）
+	AJAX请求无法获得（ajax只能同源通信,可以发送，但浏览器会拒绝接受响应）
+    jsonp ,webSocket CORS 解决AJAX无法跨域
 
 ### 2.前后端如何通信
 
 	AJAX （同源通信）
-	WebSocket 不受同源策略限制
-	CORS     支持跨域通信，也支持同源
+	WebSocket 一种新的通信协议，不受同源策略限制
+	CORS     W3C标准，支持跨域通信，也支持同源
 
 ### 3.如何创建 AJAX  见 ajax.js
 	XMLHttpRequest 对象的工作流程
@@ -367,12 +367,13 @@ float 书写顺序很重要，float和absolute 都可以结合margin，二者都
 	事件的触发顺序
 
 
-### 4.跨域通信的几种方式  10.7 更新
+### 4.跨域通信的几种方式  10.7 更新 ,2019.1.2 update
+
 
 1. JSONP
 
 		就是利用<script>标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。
-		当需要通讯时，本站脚本创建一个<script>元素，地址指向第三方的API网址，形如：    
+		当需要通讯时，本站脚本动态创建一个<script>元素，地址指向第三方的API网址，形如：    
 		<script src="http://www.example.net/api?param1=1&param2=2"></script>     
 		并提供一个回调函数来接收数据（函数名可约定，或通过地址参数传递）。     
 		第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如: callback({"name":"hax","gender":"Male"})

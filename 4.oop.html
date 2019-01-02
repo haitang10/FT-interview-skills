@@ -8,7 +8,7 @@
         <script type="text/javascript">
 
 
-            // 1.类的声明，ES5 构造函数
+// 1.类的声明，ES5 构造函数
             function Animal(name) {
                 this.name = name
             }
@@ -20,10 +20,9 @@
             }
             // 实例化一个类
             console.log(new Animal('damao'), new Animal2('xiaogou'))
-// 继承
 
-
-
+// 继承- bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数。
+// bind 与call ,apply 区别在于bind return 一个新函数，而call，apply先改变函数内部this的指向然后在所指定的作用域中调用该函数,返回结果
 
 
             // 1.构造函数实现继承,
@@ -104,7 +103,7 @@
 
 
             // 5. 组合方式改进，优化2,,隔离父类和子类，通过Object.create()创造中间变量指定子类的原型和     子类原型的构造函数，利用
-            // Child4.prototype = Object.create(Parent4.prototype) + Child5.prototype.constructor = Child5
+            // Child5.prototype = Object.create(Parent5.prototype) + Child5.prototype.constructor = Child5
             function Parent5() {
                 this.name = 'parent5'
                 this.play = [1,2,3,4]

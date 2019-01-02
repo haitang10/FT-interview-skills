@@ -2,7 +2,7 @@
  * @Author: 王贺
  * @Date:   2018-12-22T19:21:55+08:00
  * @Last modified by:   王贺
- * @Last modified time: 2018-12-22T22:05:59+08:00
+ * @Last modified time: 2019-01-02T16:42:18+08:00
  */
  /*
  XMLHttpRequest 对象的工作流程
@@ -11,7 +11,8 @@
      3. 接受并处理服务器传回的数据
      4. 更新网页数据
 
-更多内容详见  https://wangdoc.com/javascript/bom/xmlhttprequest.html
+更多内容详见
+https://wangdoc.com/javascript/bom/xmlhttprequest.html
 https://www.jianshu.com/p/2be2e4f1fc8e
 https://segmentfault.com/a/1190000008950789
   */
