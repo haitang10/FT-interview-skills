@@ -39,6 +39,7 @@
                 // 将父类构造函数this指向子类的实例
                 this.type = 'child1'
             }
+            var c1 = new Child1()
             console.log(new Child1())
             // 构造函数实现继承原理是将父类构造函数this指向子类的实例
             // 缺点是父类原型对象上的方法和属性无法继承
@@ -58,7 +59,7 @@
             var c2 = new Child2()
             var c22 = new Child2()
             c2.play.push(4)
-            // 改变c2.play c22.play 也会改变
+            // 改变c2.play c22.play 也会改变,因为play 属性定义在原型prototype上
 
 
 

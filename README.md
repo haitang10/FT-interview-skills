@@ -44,7 +44,6 @@ GitHub 地址
     2.3 一面 基础知识 二面 基本原理 三面   HR
     2.4 职位描述分析 (JD)
 
-
 ----------
 
 # 3. 一面 #
@@ -368,7 +367,10 @@ https://wangdoc.com/javascript/bom/same-origin.html
 
 
 ### 4.跨域通信的几种方式  10.7 更新 ,2019.1.2 update
-
+跨域通信大致分为三种场景，每个场景又对应不同的方法
+一是跨全域，ajax和后端通信，例如jsonp,webSocket CORS
+另一种是iframe页面，窗口间的通信，通过hash,,postMessage 等
+还有就是共享cookie，设置document.domian，因为浏览器规定不同源不能共享cookie
 
 1. JSONP
 
@@ -401,16 +403,21 @@ https://wangdoc.com/javascript/bom/same-origin.html
 
 ### 1.CSRF  跨站请求伪造，Cross-site request forgery
 
-攻击原理是：A 网站某个接口存在漏洞，用户登录过A网站
+攻击原理是：
+A 网站某个接口存在漏洞，用户登录过A网站，A服务器下发cookie到浏览器
+用户打开B网站，B引诱或者主动发送一个伪造的请求到A，假装是受信任的用户
+可以是get请求或者POST（利用表单跨域），这时浏览器会带着cookie发送请求到A网站，
 
-防御措施：
+
+防御措施：服务器下发token到cookie里，并把token写在A表单里，这样发送请求的时候就会验证cookie的token和表单里的token是否一致，
 
 	Token验证  
 	Referer 验证
 	隐藏令牌
 
 ### 2.XSS 跨域脚本攻击  cross-site scripting
-向页面注入js代码
+原理：是向页面注入js代码
+防御方法：要坚持一个原则：永远不要相信用户的输入，对每一条输入都进行验证
 
 ##  3.9 数据结构和算法类  ##
 
