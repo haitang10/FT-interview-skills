@@ -2,7 +2,7 @@
  * @Author: 王贺
  * @Date:   2019-01-03T16:02:51+08:00
  * @Last modified by:   王贺
- * @Last modified time: 2019-01-03T23:24:52+08:00
+ * @Last modified time: 2019-01-05T22:44:50+08:00
  */
 
 
@@ -78,6 +78,7 @@ http://huang303513.github.io/2016/12/08/Javascript%E7%9A%84%E6%95%B0%E6%8D%AE%E7
 2.数组构建栈，先进后出，我们需要实现添加、删除元素、获取栈顶元素、已经是否为空，栈的长度、清除元素等几个基本操作。下面是基本定义。
 
 2.1 构造函数实现栈
+
 function Stack() {
     this.items = []
 }
@@ -113,4 +114,181 @@ Stack.prototype = {
         console.log(this.items.toString())
       }
 }
-2.2 栈
+
+2.2 class 实现栈
+
+class Stack1 {
+    constructor() {
+        this.items = []
+    }
+    push(element) {
+        this.items.push(element)
+    }
+    pop() {
+        this.items.pop()
+    }
+    peek() {
+        return this.items[this.getCount() - 1]
+    }
+    getCount() {
+        return this.items.length
+    }
+    isEmpty() {
+        return this.items.length === 0
+    }
+
+}
+
+2.3 通过栈实现正整数10进制转二进制，原理是除2取余数，入栈，最后依次出栈，正好先进后出  10 1010
+
+const divideBy22 = function(number) {
+
+    if (number <= 0){
+        return '请输入正整数'
+    }
+    let stack = new Stack1()
+    let rem
+    let decString = ''
+    // 不停除2取余数入栈
+    while(number > 0) {
+        rem = number%2
+        stack.push(rem)
+        number = Math.floor(number/2)
+    }
+    // 栈非空，最后依次出栈
+    while(!stack.isEmpty()) {
+        decString += stack.pop().toString()
+    }
+    return decString
+
+}
+divideBy22()
+
+function divideBy2(number) {
+    if (number <= 0){
+        return '请输入正整数'
+    }
+    let stack = new Stack()
+    let rem
+    let decString = ''
+    // 不停除2取余数入栈
+    while(number > 0) {
+        rem = number%2
+        stack.push(rem)
+        number = Math.floor(number/2)
+    }
+    // 栈非空，最后依次出栈
+    while(!stack.isEmpty()) {
+        decString += stack.pop().toString()
+    }
+    return decString
+}
+
+2.4  LeetCode 20 匹配序号，原理是设置map ,循环将字符串入栈遇到不是一个方向的就入栈出栈看和是否为0
+map={
+    '(':'-1',
+    ')':'1',
+    '[':'-2',
+    ']':'2',
+    '{':'-3',
+    '}':'3'
+}
+
+function isValid(s) {
+    首先可以对s进行验证，比如是否为字符串，长度是否为偶数，第一个括号的方向
+    let map={
+        '(':'-1',
+        ')':'1',
+        '[':'-2',
+        ']':'2',
+        '{':'-3',
+        '}':'3'
+    }
+    let stack = []
+    // 循环将字符串入栈,遇到不是一个方向的就入栈出栈看和是否为0
+    for(let i=0; i<s.length; i++) {
+         if(map[s[i]]<0) {
+             stack.push(s[i])
+         }
+         // 方向不同就和上一个相加
+         else {
+             let last = stack.pop()
+             if(map[last] + map[s[i]] !=== 0) return false
+         }
+    }
+    if(stack.length === 0) return false
+    return true
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+3.队列，单链队列，循环队列
+
+单链队列出队的时间复杂度是O(n),因为要遍历整个队列
+单链队列入队和出队时尾部指针和头部指针+1
+class Queue {
+    constructor() {
+        this.queue = []
+        this.name = 'duilie'
+    }
+    enQueue(ele) {
+        this.queue.push(ele)
+    }
+    deQueue() {
+        this.queue.shift()
+    }
+    getHeader() {
+        return this.queue[0]
+    }
+    isEmpty() {
+        return this.queue.length === 0
+    }
+}
+
+// 循环队列
+class SqQueue {
+    constructor(length) {
+        this.queue = new Array(length + 1)
+        this.first = 0
+    }
+}
+// 优先队列，使用继承
+class PriorityQueue1 extends Queue{
+    constructor() {
+        super()
+    }
+    print() {
+        console.log(this.queue)
+    }
+    enqueue(element, priority) {
+        // 首先定义一个对象，包含元素和优先级
+        let queueElement = {
+            'element':element,
+            'priority': priority
+        }
+        // function QueueElement(tempelement,temppriority){
+        //     this.element = tempelement;
+        //     this.priority = temppriority;
+        // }
+        // var queueElement = new QueueElement(element,priority);
+        // 如果队列为空，就添加这个对象
+        if(this.isEmpty()){
+            this.queue.push(queueElement)
+        }
+        // 如果队列不为空，遍历队列，比较将要入列的元素的优先级，数值小的排在前面，利用splice方法，插入后break
+        else{
+            let added = false;
+            for(let i = 0; i < this.queue.length;i++){
+                if(queueElement.priority < this.queue[i].priority) {
+                    this.queue.splice(i,0,queueElement)
+                    added = true
+                    break
+                }
+            }
+            // 如果队列中优先级都比要插入的对象高，那就放到队尾，用added表示有没有插入进去
+            if(!added){
+                this.queue.push(queueElement)
+            }
+        }
+    }
+}
+var sed = new PriorityQueue1()
+sed.enqueue('a',6)

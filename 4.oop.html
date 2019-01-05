@@ -119,6 +119,23 @@
             var c55 = new Child5()
             c5.__proto__ === Child5.prototype === Object.create(Parent5.prototype)  // true
             c5.__proto__.__proto__ === Parent5.prototype //true
+
+// 关于ES6 实现继承
+            class Parent6 {
+                constructor() {
+                    this.name = 'parent6'
+                }
+                play() {
+
+                }
+            }
+
+            class Child6 extends Parent6 {
+                constructor() {
+                    super()
+                }
+            }
+
         </script>
     </body>
 </html>
