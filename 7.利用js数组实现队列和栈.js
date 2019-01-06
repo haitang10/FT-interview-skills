@@ -2,7 +2,7 @@
  * @Author: 王贺
  * @Date:   2019-01-03T16:02:51+08:00
  * @Last modified by:   王贺
- * @Last modified time: 2019-01-05T22:44:50+08:00
+ * @Last modified time: 2019-01-06T15:25:29+08:00
  */
 
 
@@ -292,3 +292,96 @@ class PriorityQueue1 extends Queue{
 }
 var sed = new PriorityQueue1()
 sed.enqueue('a',6)
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+4.链表
+数组的大小是固定的,从数组的起点或中间插入 或移除项的成本很高,因为需要移动元素
+(尽管我们已经学过的JavaScript的Array类方法可以帮 我们做这些事,但背后的情况同样是这样)。
+
+链表存储有序的元素集合,但不同于数组,链表中的元素在内存中并不是连续放置的。
+每个 元素由一个存储元素本身的节点和一个指向下一个元素的引用(也称指针或链接)组成。
+相对于传统的数组,链表的一个好处在于,添加或移除元素的时候不需要移动其他元素。然 而,链表需要使用指针,因此实现链表时需要额外注意。
+数组的另一个细节是可以直接访问任何 位置的任何元素,而要想访问链表中间的一个元素,需要从起点(表头)开始迭代列表直到找到 所需的元素
+
+
+单向链表由节点加指向下一个节点的指针构成
+
+// 定义节点类
+class Node {
+    constructor(value, next) {
+        this.value = value
+        this.next = next
+    }
+}
+// 定义链表
+class LinkList {
+    constructor() {
+        // 1。设置链表长度和虚拟头部
+        this.size = 0
+        this.head = new Node(null, null)
+    }
+    // 检查插入位置是否合法
+    checkIndex(index) {
+        if(index < 0 || index > this.size) throw Error('index err')
+    }
+    // 从头部遍历链表，找到要插入的位置,index 为要插入的位置，当index, currentInde 相等时说明找到位置，返回的结果为前一个节点
+    find(header, index, currentIndex) {
+        if(index===currentIndex) return header
+        return this.find(header.next, index, currentIndex+1)
+    }
+    // 添加节点，添加的时候index的值可以为this.size
+    addNode(v, index) {
+        // 检查index是否合法
+        this.checkIndex(index)
+        // 当往链表末尾插入时，prev.next 为空
+        // 其他情况时，因为要插入节点，所以插入的节点,的 next 应该是 prev.next
+        // 然后设置 prev.next 为插入的节点
+
+        // 找到要插入的位置,比如要插入的位置是1，那么find之后的结果就是前一个节点即位置为0 的节点
+        let prev = this.find(this.head, index, 0)
+        prev.next = new Node(v, prev.next)
+        this.size ++
+        return prev.next
+    }
+    // 头部插入,尾部插入
+    addToHead(v) {
+        return this.addNode(v, 0)
+    }
+    addToLast(v) {
+        return this.addNode(v, this.size)
+    }
+    // 移除节点,移除节点的时候index最大值只能为this.size-1
+    removeNode(index) {
+        this.checkIndex(index+1)
+        let prev = find(this.head, index, 0)
+        let node = prev.next
+        // 把要移除的节点的指向赋值给前一个节点的next，并把要删除的节点的next设为null
+        prev.next = node.next
+        node.next = null
+        this.size--
+        return node
+    }
+    // 移除头部和尾部
+    removeFirst() {
+        return removeNode(0)
+    }
+    removeLast() {
+        return removeNode(this.size - 1)
+    }
+    // 索引接点
+    getNode(index) {
+        this.checkIndex(index)
+        if (this.isEmpty()) return
+        return this.find(this.head, index, 0).next
+      }
+    isEmpty() {
+      return this.size === 0
+    }
+    getSize() {
+      return this.size
+    }
+}
+var link = new LinkList()
+link.addNode('aa', 0)
+
+
+双向链表的实现，每一个节点由本身的值和next，prev指向构成，以后再写吧
