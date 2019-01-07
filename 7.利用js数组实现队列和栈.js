@@ -2,7 +2,7 @@
  * @Author: 王贺
  * @Date:   2019-01-03T16:02:51+08:00
  * @Last modified by:   王贺
- * @Last modified time: 2019-01-06T15:25:29+08:00
+ * @Last modified time: 2019-01-06T23:00:35+08:00
  */
 
 
@@ -294,7 +294,7 @@ var sed = new PriorityQueue1()
 sed.enqueue('a',6)
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 4.链表
-数组的大小是固定的,从数组的起点或中间插入 或移除项的成本很高,因为需要移动元素
+数组的大小是固定的,从数组的起点或中间插入 或移除项的成本很高,因为需要移动元素，但是查找和访问很快
 (尽管我们已经学过的JavaScript的Array类方法可以帮 我们做这些事,但背后的情况同样是这样)。
 
 链表存储有序的元素集合,但不同于数组,链表中的元素在内存中并不是连续放置的。
@@ -324,6 +324,7 @@ class LinkList {
         if(index < 0 || index > this.size) throw Error('index err')
     }
     // 从头部遍历链表，找到要插入的位置,index 为要插入的位置，当index, currentInde 相等时说明找到位置，返回的结果为前一个节点
+    // 运用递归的方式
     find(header, index, currentIndex) {
         if(index===currentIndex) return header
         return this.find(header.next, index, currentIndex+1)
@@ -336,7 +337,7 @@ class LinkList {
         // 其他情况时，因为要插入节点，所以插入的节点,的 next 应该是 prev.next
         // 然后设置 prev.next 为插入的节点
 
-        // 找到要插入的位置,比如要插入的位置是1，那么find之后的结果就是前一个节点即位置为0 的节点
+        // 找到要插入的位置,比如要插入的位置是1，那么find之后的结果就是前一个节点即位置为0 的节点即prev为0 节点
         let prev = this.find(this.head, index, 0)
         prev.next = new Node(v, prev.next)
         this.size ++
@@ -385,3 +386,47 @@ link.addNode('aa', 0)
 
 
 双向链表的实现，每一个节点由本身的值和next，prev指向构成，以后再写吧
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+5.二叉树
+https://yuchengkai.cn/docs/cs/dataStruct.html#实现-3
+实现二分搜索树，很简单,插入的时候不需要知道位置，并且root节点一直在变化
+class Node {
+    constructor(v) {
+        this.value = v
+        this.left = null
+        this.right = null
+    }
+}
+class BST {
+    constructor() {
+        // 设置树的大小和虚拟根节点
+        this.size = 0
+        this.root = null
+    }
+    getsize() {
+        return this.size
+    }
+    isEmpty() {
+    return this.size === 0
+    }
+    addNode(v) {
+        this.root = this._addChild(this.root, v)
+    }
+    // 添加节点时，需要比较添加的节点值和当前
+  // 节点值的大小
+    _addChild(node, v) {
+        // 如果node为null,树为空，直接将该节点作为root节点
+        if(!node) {
+            this.size++
+            return new Node(v)
+        }
+        // 如果v比该节点值小，那就递归和该节点左侧子节点比较，一级一级向下
+        if(v < node.value) {
+            node.left = this._addChild(node.left, v)
+        }
+        else if(v > node.value) {
+            node.right = this._addChild(node.right, v)
+        }
+        return node
+    }
+}
