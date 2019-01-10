@@ -87,7 +87,7 @@
                         return a-b
                     })
 
-            // ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
             // 2.数组构建栈，先进后出，我们需要实现添加、删除元素、获取栈顶元素、已经是否为空，栈的长度、清除元素等几个基本操作。下面是基本定义。
             //
             // 2.1 构造函数实现栈
@@ -232,7 +232,7 @@
                 if(stack.length === 0) return false
                 return true
             }
-            // ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
             // // 3.队列，单链队列，循环队列
             // //
             // // 单链队列出队的时间复杂度是O(n),因为要遍历整个队列
@@ -246,7 +246,9 @@
                     this.queue.push(ele)
                 }
                 deQueue() {
-                    this.queue.shift()
+                    // 这里要加return
+                    return this.queue.shift()
+
                 }
                 getHeader() {
                     return this.queue[0]
@@ -305,7 +307,7 @@
             }
             var sed = new PriorityQueue1()
             sed.enqueue('a',6)
-            // ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
             /*
             4.链表
             数组的大小是固定的,从数组的起点或中间插入 或移除项的成本很高,因为需要移动元素，但是查找和访问很快
@@ -401,7 +403,7 @@
             // 双向链表的实现，每一个节点由本身的值和next，prev指向构成，以后再写吧
 
 
-            // ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
             // 5.二叉树
             // https://yuchengkai.cn/docs/cs/dataStruct.html#实现-3
             // 实现二分搜索树，很简单,插入的时候不需要知道位置，并且root节点一直在变化
@@ -410,6 +412,7 @@
                     this.value = v
                     this.left = null
                     this.right = null
+                    this.size = 1
                 }
             }
             class BST {
@@ -417,7 +420,6 @@
                 constructor() {
 
                     this.size = 0
-                    this.a = null
                     this.root = null
                 }
                 getsize() {
@@ -443,9 +445,13 @@
                     }
                     // 如果v比该节点值小，那就递归和该节点左侧子节点比较，一级一级向下
                     if(v < node.value) {
+                        // 排名需要为节点增加size属性，表示该node.size++节点下有多少比自己小的节点
+                        node.size++
                         node.left = this._addChild(node.left, v)
                     }
                     else if(v > node.value) {
+                        // 排名需要为节点增加size属性，表示该node.size++节点下有多少比自己小的节点
+                        node.size++
                         node.right = this._addChild(node.right, v)
                     }
                     // 返回添加完左右叶子结点的节点
@@ -454,7 +460,7 @@
 
                  // 4.二叉树的遍历
                  // 4.1 先序遍历可用于打印树的结构,先序遍历先访问根节点，然后访问左节点，最后访问右节点。
-                 pre() {
+                 preTraversal() {
                      console.log('先序遍历')
 
                      this._pre(this.root)
@@ -468,8 +474,7 @@
                  }
 
                  // 4.2 中序遍历可用于排序,对于 BST 来说，中序遍历可以实现一次遍历就得到有序的值,中序遍历表示先访问左节点，然后访问根节点，最后访问右节点。
-
-                 mid() {
+                 midTraversal() {
                      console.log('中序遍历')
                      this._mid(this.root)
                  }
@@ -481,7 +486,7 @@
                      }
                  }
                  // 4.3 后序遍历可用于先操作子节点再操作父节点的场景,后序遍历表示先访问左节点，然后访问右节点，最后访问根节点。
-                 back() {
+                 backTraversal() {
                      console.log('后序遍历')
                      this._back(this.root)
                  }
@@ -492,6 +497,46 @@
                          console.log(node.value)
                      }
                  }
+
+                 // 4.4 广度遍历，以上的这几种遍历都可以称之为深度遍历，对应的还有种遍历叫做广度遍历，也就是一层层地遍历树。
+                 // 对于广度遍历来说，我们需要利用之前讲过的队列结构来完成
+                 // 通过将节点入队出队来遍历
+                 breadthTRaversal() {
+                     // 如果根节点为空，返回null
+                     if(!this.root) return null
+                     let q = new Queue()
+                     // 将根节点入队
+                     console.log('this.root', this.root)
+                     q.enQueue(this.root)
+                     // 循环判断队列是否为空，为空代表树遍历完毕
+                     console.log('q', q)
+
+                     while(!q.isEmpty()) {
+                         console.log('q', q)
+                         // 将队首出队，判断是否有左右子树,有的话，就先左后右入队
+                         let x = q.deQueue()
+                         console.log('x',x.value)
+                         if(x.left) q.enQueue(x.left)
+                         if(x.right) q.enQueue(x.right)
+                     }
+                 }
+                 // 5. 排名
+                 select(k) {
+                      let node = this._select(this.root, k)
+                      return node ? node.value : null
+                 }
+                _select(node, k) {
+                      if (!node) return null
+                      // 先获取左子树下有几个节点
+                      let size = node.left ? node.left.size : 0
+                      // 判断 size 是否大于 k
+                      // 如果大于 k，代表所需要的节点在左节点
+                      if (size > k) return this._select(node.left, k)
+                      // 如果小于 k，代表所需要的节点在右节点
+                      // 注意这里需要重新计算 k，减去根节点除了右子树的节点数量
+                      if (size < k) return this._select(node.right, k - size - 1)
+                      return node
+                  }
 
             }
 
@@ -505,18 +550,19 @@
             bst1.addNode(10)
             bst1.addNode(2)
             // 递归很复杂，但是打印出来就想明白了
-            bst1.pre()
-            bst1.mid()
-            bst1.back()
+            bst1.preTraversal()
+            bst1.midTraversal()
+            bst1.backTraversal()
+
+            bst1.breadthTRaversal()
+            bst1.select(5)
 
             // var f1 = function() {
             //     return 'dsada'
             //     console.log('sdsdf')
             // }
             // var bbb = f1()
-            
-// 以上的这几种遍历都可以称之为深度遍历，对应的还有种遍历叫做广度遍历，也就是一层层地遍历树。
-// 对于广度遍历来说，我们需要利用之前讲过的队列结构来完成
+
 
         </script>
     </body>
