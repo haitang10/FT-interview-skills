@@ -509,20 +509,20 @@
                      console.log('this.root', this.root)
                      q.enQueue(this.root)
                      // 循环判断队列是否为空，为空代表树遍历完毕
-                     console.log('q', q)
 
                      while(!q.isEmpty()) {
-                         console.log('q', q)
                          // 将队首出队，判断是否有左右子树,有的话，就先左后右入队
                          let x = q.deQueue()
-                         console.log('x',x.value)
+                         console.log('广度遍历',x.value)
                          if(x.left) q.enQueue(x.left)
                          if(x.right) q.enQueue(x.right)
                      }
                  }
                  // 5. 排名
                  select(k) {
+
                       let node = this._select(this.root, k)
+                      console.log('获取排名 ',k, node)
                       return node ? node.value : null
                  }
                 _select(node, k) {
@@ -535,6 +535,8 @@
                       // 如果小于 k，代表所需要的节点在右节点
                       // 注意这里需要重新计算 k，减去根节点除了右子树的节点数量
                       if (size < k) return this._select(node.right, k - size - 1)
+                      // 排名为k的node前面有k个node，所以当size = k 的时候，说明node前面有k个比他小的，那node就刚好排名k
+
                       return node
                   }
 
@@ -555,7 +557,10 @@
             bst1.backTraversal()
 
             bst1.breadthTRaversal()
-            bst1.select(5)
+            for (let i=0; i<7; i++) {
+                bst1.select(i)
+            }
+
 
             // var f1 = function() {
             //     return 'dsada'
