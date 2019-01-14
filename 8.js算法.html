@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            https://www.zhihu.com/search?q=%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95&type=content
+            <!-- //1.利用移位和按位异或实现加法，a & b 的结果就是要进位的位数-->
+
+            function sum(a, b) {
+              if (a == 0) return b
+              if (b == 0) return a
+              let newA = a ^ b
+
+              let newB = (a & b) << 1
+              console.log('a,b',newA,newB)
+              return sum(newA, newB)
+            }
+
+            //交换两个数
+            function swap(array, left, right) {
+                let rightValue = array[right]
+                array[right] = array[left]
+                array[left] = rightValue
+            }
+
+            <!--  1. 冒泡排序，从第一个元素开始把当前元素和下一个比较，如果当前元素大，那就交换位置重复操作直到比较到最后一个元素，那么此时最后一个元素就是该数组中最大的数。
+             下一轮重复以上操作，但是此时最后一个元素已经是最大数了，所以不需要再比较最后一个元素，只需要比较到 length - 1 的位置。时间复杂度 n*n
+             -->
+            function bubble(array) {
+                if(array.length < 2 || !array) return
+                for(let i = array.length - 1; i > 0; i--) {
+                    //从0 到length - 1 遍历
+                  for(let j = 0; j < i; j++) {
+                      if(array[j]>array[j+1]) swap(array, j, j+1)
+                  }
+                }
+                return array
+            }
+
+            <!-- 2. 插入排序，每次选择一个元素，并且将这个元素和整个数组中的所有元素进行比较，然后插入到合适的位置，图片演示如上，时间复杂度 O(n^2) -->
+            function insertion_sort(array) {
+                if(array.length < 2 || !array) return
+                for(let i = 1; i < array.length; i++) {
+                    for(let j = i; j >=1 && array[j] < array[j-1]; j--) {
+                        swap(array, j-1,j)
+                    }
+                }
+                return array
+            }
+            <!-- 3. 选择排序的原理如下。遍历数组，设置最小值的索引为 0，如果取出的值比当前最小值小，就替换最小值索引，
+                遍历完成后，将第一个元素和最小值索引上的值交换。如上操作后，第一个元素就是数组中的最小值，下次遍历就可以从索引 1 开始重复上述操作 -->
+
+            function selection(array) {
+                if(array.length < 2 || !array) return
+                for(let i = 0; i < array.length - 1; i++) {
+                    let minIndex = i
+                    for(let j = i + 1; j < array.length; j++) {
+                        minIndex = array[j] < array[minIndex] ? j : minIndex
+                    }
+                    swap(array, i, minIndex)
+                }
+                return array
+            }
+        </script>
+    </body>
+</html>
